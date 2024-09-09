@@ -3,36 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PermissionsController extends Controller
 {
+
+    //index method
     public function index()
     {
         return view('permissions.index');
     }
+
+    //Create method
 
     public function create()
     {
         return view('permissions.create');
     }
 
+    //Store method
     public function store(Request $request)
     {
-        // Validate the request...
-        $request->validate([
-            'name' => 'required|unique:permissions|max:255',
-            'description' => 'required',
+       $validator = Validator::make($request->all(),[
+            'name' => 'required|unique:permissions|min:4|max:255',
         ]);
+   if($validator->passes()){
+   }else{
 
-        $permission = new Permission;
+    return redirect()-> route('permission.create') -> withInput() ->withErrors($validator);
 
-        $permission->name = $request->name;
-        $permission->description = $request->description;
+        // $permission = new Permission;
 
-        $permission->save();
+        // $permission->name = $request->name;
+        // $permission->description = $request->description;
 
-        return redirect('/permissions');
+        // $permission->save();
+
+        // return redirect('/permissions');
     }
+    }
+
+
+    //show method
 
     public function show($id)
     {
@@ -41,6 +53,8 @@ class PermissionsController extends Controller
         return view('permissions.show', ['permission' => $permission]);
     }
 
+    //edit method
+
     public function edit($id)
     {
         $permission = Permission::findOrFail($id);
@@ -48,9 +62,11 @@ class PermissionsController extends Controller
         return view('permissions.edit', ['permission' => $permission]);
     }
 
+    //update method
+
     public function update(Request $request, $id)
     {
-        // Validate the request...
+
         $request->validate([
             'name' => 'required|unique:permissions|max:255',
             'description' => 'required',
@@ -65,6 +81,8 @@ class PermissionsController extends Controller
 
         return redirect('/permissions');
     }
+
+    //destroy method
 
     public function destroy($id)
     {
