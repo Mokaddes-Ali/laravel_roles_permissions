@@ -13,7 +13,10 @@ class PermissionsController extends Controller
     //index method
     public function index()
     {
-        return view('permissions.list');
+        $permissions = Permission::orderBy('created_at', 'DESC')->paginate(10);
+        return view('permissions.list',[
+            'permissions' => $permissions
+        ]);
     }
 
     //Create method
@@ -48,9 +51,10 @@ class PermissionsController extends Controller
 
     public function edit($id)
     {
-        $permission = Permission::findOrFail($id);
+        $permissions = Permission::findOrFail($id);
 
-        return view('permissions.edit', ['permission' => $permission]);
+        return view('permissions.edit',
+         ['permission' => $permissions]);
     }
 
 

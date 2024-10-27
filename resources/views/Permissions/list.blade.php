@@ -22,11 +22,35 @@
             </div>
             @endif
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            <table class="table-auto w-full">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">ID</th>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Created</th>
+                        <th class="px-4 py-2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($permissions as $permission)
+                    <tr>
+                        <td class="border px-4 py-2">{{ $permission->id }}</td>
+                        <td class="border px-4 py-2">{{ $permission->name }}</td>
+                        <td class="border px-4 py-2">
+                            {{\Carbon\Carbon::parse( $permission->created_at)->format('d M, Y') }}</td>
+                        <td class="border px-4 py-2">
+                            <a href="{{ route('permission.edit', $permission->id) }}" class="bg-blue-500 text-white px-4 py-1 rounded font-medium">Edit</a>
+                            <form action="{{ route('permission.destroy', $permission->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 text-white px-4 py-1 rounded font-medium">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
 
-                </div>
-            </div>
+
         </div>
     </div>
 </x-app-layout>

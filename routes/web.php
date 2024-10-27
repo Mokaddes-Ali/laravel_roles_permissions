@@ -18,10 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/permissions/create', [PermissionsController::class, 'create'])->name('permission.create');
     Route::post('/permissions', [PermissionsController::class, 'store'])->name('permission.store');
     Route::get('/permissions', [PermissionsController::class, 'index'])->name('permission.index');
-    // Route::get('/permissions/{permission}', [PermissionsController::class, 'show'])->name('permission.show');
-    // Route::get('/permissions/{permission}/edit', [PermissionsController::class, 'edit'])->name('permission.edit');
-    // Route::patch('/permissions/{permission}', [PermissionsController::class, 'update'])->name('permission.update');
-    // Route::delete('/permissions/{permission}', [PermissionsController::class, 'destroy'])->name('permission.destroy');
+    Route::get('/permissions/{permission}', [PermissionsController::class, 'show'])->name('permission.show');
+    Route::get('/permissions/{id}/edit', [PermissionsController::class, 'edit'])->name('permission.edit');
+    Route::patch('/permissions/{permission}', [PermissionsController::class, 'update'])->name('permission.update');
+    Route::delete('/permissions/{permission}', [PermissionsController::class, 'destroy'])->name('permission.destroy');
 });
 
 
