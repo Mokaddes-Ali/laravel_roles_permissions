@@ -1,8 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Permission/Create') }}
-        </h2>
+        <div class="flex justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Permission/Create') }}
+            </h2>
+
+            <a href="{{ route('permission.index') }}" class="bg-slate-600 text-red-600 px-4 py-3 rounded font-medium">Back List</a>
+        </div>
     </x-slot>
 
     <div class="py-12">

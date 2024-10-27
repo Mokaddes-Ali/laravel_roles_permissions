@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permission;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
 {
@@ -13,7 +13,7 @@ class PermissionsController extends Controller
     //index method
     public function index()
     {
-        return view('permissions.index');
+        return view('permissions.list');
     }
 
     //Create method
@@ -32,7 +32,9 @@ class PermissionsController extends Controller
         ]);
    if($validator->passes()){
 
-      Permission::create(['name' => $request->name]);
+    Permission::create(['name' => $request->name]);
+
+        return redirect()->route('permission.index')->with('success', 'Permission created successfully');
 
    }else{
 
