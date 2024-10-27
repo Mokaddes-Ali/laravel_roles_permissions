@@ -43,8 +43,10 @@
                             <form action="{{ route('permission.destroy', $permission->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-4 py-1 rounded font-medium">Delete</button>
+                                <button type="submit" class="bg-red-500 text-white px-4 py-1 rounded font-medium"
+                                        onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
                             </form>
+
                         </td>
                     </tr>
                     @endforeach

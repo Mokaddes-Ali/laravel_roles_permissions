@@ -64,21 +64,26 @@ class PermissionsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $permissions = Permission::findOrFail($id);
 
-        $request->validate([
-            'name' => 'required|unique:permissions|max:255',
-            'description' => 'required',
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|unique:permissions,name|min:3,'.$id.', id',
         ]);
+   if($validator->passes()){
 
-        $permission = Permission::findOrFail($id);
+   // Permission::create(['name' => $request->name]);
+   $permissions->name = $request->name;
+    $permissions->save();
 
-        $permission->name = $request->name;
-        $permission->description = $request->description;
+        return redirect()->route('permission.index')->with('success', 'Permission Updated successfully');
 
-        $permission->save();
+   }else{
 
-        return redirect('/permissions');
+    return redirect()-> route('permission.edit', $id) -> withInput() ->withErrors($validator);
+
     }
+    }
+
 
 
     //destroy method
@@ -87,6 +92,8 @@ class PermissionsController extends Controller
     {
         $permission = Permission::findOrFail($id);
         $permission->delete();
+
+        session()->flash('success', 'Permission deleted successfully');
 
         return redirect('/permissions');
     }
