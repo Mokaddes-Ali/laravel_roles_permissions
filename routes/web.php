@@ -25,12 +25,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/permissions/{permission}', [PermissionsController::class, 'destroy'])->name('permission.destroy');
 
     //Role routes
-    Route::get('/roles/create', [RoleController::class, 'create'])->name('permission.create');
-    Route::post('/roles', [RoleController::class, 'store'])->name('permission.store');
-    Route::get('/roles', [RoleController::class, 'index'])->name('permission.index');
-    Route::get('/roles/{id}/edit', [RoleController::class, 'edit'])->name('permission.edit');
-    Route::post('/roles/{id}', [RoleController::class, 'update'])->name('permission.update');
-    Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('permission.destroy');
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('/roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::post('/roles/{id}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
 });
 
 

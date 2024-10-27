@@ -7,19 +7,22 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
 
+    // this methiod will return the view of the roles
     public function index()
     {
-        $roles = Role::orderBy('created_at', 'DESC')->paginate(10);
+
         return view('roles.list',[
-            'roles' => $roles
+
         ]);
     }
 
+     // this methiod will return the view of the roles
     public function create()
     {
-        
         return view('roles.create');
     }
+
+    // this methiod will return the view of the roles
 
     public function store(Request $request)
     {
@@ -76,3 +79,6 @@ class RoleController extends Controller
     }
 
 }
+
+
+
