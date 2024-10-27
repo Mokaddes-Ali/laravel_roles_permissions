@@ -9,11 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form method="POST" action="permission.store" >
+                    <form method="POST" action="{{ route('permission.store') }}" >
                         @csrf
                         <div class="mb-4">
                             <label for="name" class="sr-only">Name</label>
-                            <input type="text" name="name" id="name" placeholder="Permission Name" class="bg-gray-100 border-2 w-full p-4 rounded-lg ">
+                            <input type="text" value="{{ old('name') }}" name="name" id="name" placeholder="Permission Name" class="bg-gray-100 border-2 w-full p-4 rounded-lg ">
                             @error('name')
                                 <div class="text-red-500 mt-2 text-md">
                                     {{ $message }}

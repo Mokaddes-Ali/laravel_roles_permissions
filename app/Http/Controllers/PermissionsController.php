@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 
 class PermissionsController extends Controller
 {
@@ -21,6 +23,7 @@ class PermissionsController extends Controller
         return view('permissions.create');
     }
 
+
     //Store method
     public function store(Request $request)
     {
@@ -28,32 +31,18 @@ class PermissionsController extends Controller
             'name' => 'required|unique:permissions|min:4|max:255',
         ]);
    if($validator->passes()){
+
+      Permission::create(['name' => $request->name]);
+
    }else{
 
     return redirect()-> route('permission.create') -> withInput() ->withErrors($validator);
 
-        // $permission = new Permission;
-
-        // $permission->name = $request->name;
-        // $permission->description = $request->description;
-
-        // $permission->save();
-
-        // return redirect('/permissions');
     }
-    }
-
-
-    //show method
-
-    public function show($id)
-    {
-        $permission = Permission::findOrFail($id);
-
-        return view('permissions.show', ['permission' => $permission]);
     }
 
     //edit method
+
 
     public function edit($id)
     {
@@ -61,6 +50,9 @@ class PermissionsController extends Controller
 
         return view('permissions.edit', ['permission' => $permission]);
     }
+
+
+
 
     //update method
 
@@ -81,6 +73,7 @@ class PermissionsController extends Controller
 
         return redirect('/permissions');
     }
+
 
     //destroy method
 
