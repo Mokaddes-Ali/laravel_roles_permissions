@@ -24,6 +24,19 @@
                                 </div>
                             @enderror
                         </div>
+
+                        <div class="grid grid-cols-4">
+                            @if($permissions->isNotEmpty())
+                            @foreach ($permissions as $permission)
+                                <div class="mb-3">
+                                    <input type="checkbox" name="permissions[]"
+                                    id="permissions.{{ $permission->id }}" class="rounded"  value="{{ $permission->name }}" >
+                                    <label for="permissions.{{ $permission->id }}">{{ $permission->name }}</label>
+                                </div>
+                            @endforeach
+                            @endif
+                        </div>
+
                         <div>
                             <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Create Role</button>
                         </div>

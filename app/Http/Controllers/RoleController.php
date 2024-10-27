@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -19,7 +20,12 @@ class RoleController extends Controller
      // this methiod will return the view of the roles
     public function create()
     {
-        return view('roles.create');
+        $permissions = Permission::orderBy('name', 'ASC')->get();
+
+        return view('role.create',[
+
+            'permissions' => $permissions
+        ]);
     }
 
     // this methiod will return the view of the roles
